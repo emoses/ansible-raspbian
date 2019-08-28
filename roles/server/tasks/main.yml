@@ -33,17 +33,9 @@
   tags:
     - ssh
 
-- import_tasks: ufw.yml
-  tags:
-    - ufw
-
 - import_tasks: pi.yml
   tags:
     - pi
-
-- import_tasks: postfix.yml
-  tags:
-    - postfix
 
 - import_tasks: unattended-upgrades.yml
   tags:

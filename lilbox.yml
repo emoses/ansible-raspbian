@@ -1,0 +1,36 @@
+---
+- hosts: all
+  remote_user: pi
+  become: true
+  pre_tasks:
+    - name: update apt cache
+      apt:
+        cache_valid_time: 600
+  roles:
+    - role: server
+    - role: docker_prep
+    - role: geerlingguy.pip
+    - role: geerlingguy.docker_arm
+    - role: homebridge-docker
+      tags: homebridge
+  vars_prompt:
+    - name: ansible_ssh_pass
+      prompt: "system user password"
+      private: yes
+
+  vars:
+    docker_install_compose: true
+    pip_install_packages:
+      - docker
+    system_packages:
+      - vim
+    system_default_editor_path: "/usr/bin/vim.basic"
+    system_hostname: "lilbox"
+    system_locale: "en_US.UTF-8"
+    system_timezone: "America/Los_Angeles"
+    system_tmpfs_mounts:
+      - { src: "/run", size: "10%", options: "nodev,noexec,nosuid" }
+      - { src: "/tmp", size: "10%", options: "nodev,nosuid" }
+    ssh_disable_password: false
+    ssh_public_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdlXOPSJhETsKyJHeie50OjCY7ENkAW6BL5LfZGoOVRQAicgmNOYAuuzrqT/VNTrJxTBD6Dtlwg3Eop12Jjppoe5Ltqht4t+BawpJfUgpO/oaz5cPuXkOqMYBWe/j4UvaqWiRPXoz50I7tL8ixrpEqHCQJme1Zn6kTJtRcn13pODIEIFg6MmirNBARbR4GhUU3DAG5TLd9NHrBcD/t6KwyPurvBCkgJlWyODb82MsAVIhZe6DDM7Oze0bjMGyAhPdi8DmrU02g2TgL3iM3oTa/p3ILTTbMemTVVCgidxomaCn9teCKp0bacMhGJmYiFg43Yy4UWtuBXmg5cGi8EOCN

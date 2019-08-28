@@ -1,0 +1,20 @@
+---
+- name: install docker prereqs (build-essential)
+  apt:
+    name: build-essential
+    state: present
+
+- name: install docker prereqs (libssl-dev)
+  apt:
+    name: libssl-dev
+    state: present
+
+- name: install docker prereqs (libffi-dev)
+  apt:
+    name: libffi-dev
+    state: present
+
+- name: install docker prereqs (python-dev)
+  apt:
+    name: python-dev
+    state: present

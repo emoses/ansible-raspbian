@@ -33,9 +33,11 @@ postfix_smtp_tls_cafile: /etc/ssl/certs/ca-certificates.crt
 rpi_boot_config: {}
 rpi_cmdline_config: {}
 
+ssh_disable_password: true
 ssh_sshd_config: "/etc/ssh/sshd_config"
 ssh_public_keys: []
 ssh_banner:
+
 
 ufw_rules:
   - {rule: "allow", port: "22", proto: "tcp"}

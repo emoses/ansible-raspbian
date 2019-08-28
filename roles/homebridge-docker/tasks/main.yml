@@ -1,0 +1,49 @@
+---
+- name: update pip
+  pip:
+    name: pip
+    state: latest
+
+- name: update pip ssl_hostname_target
+  pip:
+    name: backports.ssl-match-hostname
+    state: latest
+
+# - name: install apt ssl_match_hostname
+#   apt:
+#     name: python-backports.ssl-match-hostname
+#     state: latest
+
+- name: install docker on target
+  pip:
+    name: docker
+    version: '>=4.0.0'
+
+- name: install docker-compose on target
+  pip:
+    name: docker-compose
+    state: latest
+
+
+- name: build and run homebridge
+  docker_compose:
+    project_name: homebridge
+    definition:
+      version: '2'
+      services:
+        homebridge:
+          image: oznu/homebridge:raspberry-pi
+          restart: always
+          network_mode: host
+          volumes:
+            - ./config:/homebridge
+          environment:
+            - PGID=1000
+            - PUID=1000
+            - HOMEBRIDGE_CONFIG_UI=1
+            - HOMEBRIDGE_CONFIG_UI_PORT={{ homebridge_ui_port }}
+  register: output
+
+- name: homebridge docker output
+  debug:
+    var: output
