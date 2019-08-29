@@ -4,26 +4,20 @@
     name: pip
     state: latest
 
-- name: update pip ssl_hostname_target
-  pip:
-    name: backports.ssl-match-hostname
-    state: latest
+- name: install virtualenv
+  apt:
+    name: virtualenv
 
-# - name: install apt ssl_match_hostname
-#   apt:
-#     name: python-backports.ssl-match-hostname
-#     state: latest
-
-- name: install docker on target
+- name: Install docker
   pip:
     name: docker
-    version: '>=4.0.0'
+    virtualenv: /opt/ansible_env
+    version: 4.0.2
 
-- name: install docker-compose on target
+- name: Install docker-compose
   pip:
     name: docker-compose
-    state: latest
-
+    virtualenv: /opt/ansible_env
 
 - name: build and run homebridge
   docker_compose:
@@ -42,6 +36,8 @@
             - PUID=1000
             - HOMEBRIDGE_CONFIG_UI=1
             - HOMEBRIDGE_CONFIG_UI_PORT={{ homebridge_ui_port }}
+  vars:
+    ansible_python_interpreter: /opt/ansible_env/bin/python
   register: output
 
 - name: homebridge docker output

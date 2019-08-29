@@ -42,7 +42,7 @@
     state: present
   with_items:
     - regexp: "^#?PasswordAuthentication"
-      line: "PasswordAuthentication no"
+      line: "PasswordAuthentication {{ 'no' if ssh_disable_password else 'yes' }}"
     - regexp: "^#?ChallengeResponseAuthentication"
       line: "ChallengeResponseAuthentication no"
     - regexp: "^#?UsePAM"
