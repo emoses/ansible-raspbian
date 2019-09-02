@@ -14,6 +14,9 @@ docker:
 	@docker start raspbian || docker run --name raspbian -d -p 2222:2222 --privileged $(DOCKER_IMAGE)
 	@sh $(ROOT_DIR)/tests/files/wait-for-healthy.sh
 
+galaxy: requirements.yml
+	@ansible-galaxy install --roles-path $(ROOT_DIR)/roles -r requirements.yml
+
 test: docker
 	@ansible-playbook -vvv -i $(TEST_INVENTORY_FILE) $(TEST_PLAYBOOK)
 

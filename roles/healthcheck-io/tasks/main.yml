@@ -1,0 +1,11 @@
+---
+
+- name: Ensure curl
+  apt:
+    name: curl
+    state: present
+
+- name: Install healthcheck cron
+  cron:
+    job: "curl https://hc-ping.com/{{ healthcheck_io_key }}"
+    minute: "*/5"

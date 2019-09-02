@@ -5,3 +5,4 @@ hosts
 venv/
 roles/geerlingguy.pip
 roles/geerlingguy.docker_arm
+roles/hannseman.homebridge
