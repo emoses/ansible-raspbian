@@ -9,17 +9,18 @@
     name: haveged
     state: present
 
-- name: Install unifi PPA
-  apt_repository:
-    repo: deb http://www.ui.com/downloads/unifi/debian stable ubiquiti
-    state: present
-
 - name: Add unifi PPA key
   apt_key:
     url: https://dl.ubnt.com/unifi/unifi-repo.gpg
     state: present
 
+- name: Install unifi PPA
+  apt_repository:
+    repo: deb http://www.ui.com/downloads/unifi/debian stable ubiquiti
+    state: present
+
 - name: Install unifi package
   apt:
+    update_cache: yes
     name: unifi
     state: present
