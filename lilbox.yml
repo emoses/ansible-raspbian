@@ -8,13 +8,12 @@
         cache_valid_time: 600
   roles:
     - role: server
-    - role: docker_prep
-    - role: geerlingguy.pip
-    - role: geerlingguy.docker_arm
     - role: hannseman.homebridge
       tags: homebridge
     - role: healthcheck-io
       tags: healthcheck-io
+    - role: unifi-controller
+      tags: unifi
   vars_prompt:
     - name: ansible_ssh_pass
       prompt: "system user password"
