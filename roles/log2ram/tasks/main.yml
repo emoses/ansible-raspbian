@@ -1,0 +1,42 @@
+---
+
+- name: Check if log2ram exists
+  stat: 'path=/etc/systemd/system/log2ram.service'
+  register: log2ramstat
+
+- name: Install log2ram
+  when: not log2ramstat.stat.exists
+  block:
+    - name: Create Tempfile
+      tempfile:
+        state: directory
+        suffix: log2raminstall
+      register: install_dir
+    - name: Retrieve and unarchive log2ram
+      unarchive: 
+        src: https://github.com/azlux/log2ram/archive/master.tar.gz
+        dest: '{{ install_dir.path }}'
+        remote_src: yes
+    - name: Make install executable
+      file:
+        path: '{{ install_dir.path }}/log2ram-master/install.sh'
+        mode: u+x
+    - name: run install
+      command: '{{ install_dir.path }}/log2ram-master/install.sh'
+      args:
+        chdir: '{{ install_dir.path }}/log2ram-master'
+      become: yes
+    - name: Rebooting!
+      reboot:
+
+- name: Copy log2ram conf file
+  copy:
+    src: log2ram.conf
+    dest: /etc/log2ram.conf
+
+- name: Ensure log2ram service running
+  service: 
+    name: log2ram
+    enabled: yes
+
+
