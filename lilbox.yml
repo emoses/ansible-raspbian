@@ -30,6 +30,13 @@
       6536656564633331370a346661373739353263373536333266306633343466643331316265343335
       32666666393662613765373363366331313538363837666331373031333166656266343932363336
       3135663234613062313934663566386261313566323662383966
+    homebridge_myq_password: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      34653564396463363834323461313632663833663166623761633233393331323161626237336633
+      6337633366653763373539313161663461306533313530650a393939356366663734393432656539
+      61303763633036316365376338383332303636656330663136383932383138366661343237626633
+      6436303337363866650a653131363564316663376263336266643364633766316133633034663633
+      30336338306239353762323664613163386663333866666136363263663061316430
     healthcheck_io_key: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       38316561313630653533323631616534613964613031653731653665326433313563386633626236
@@ -54,7 +61,7 @@
     ssh_public_keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdlXOPSJhETsKyJHeie50OjCY7ENkAW6BL5LfZGoOVRQAicgmNOYAuuzrqT/VNTrJxTBD6Dtlwg3Eop12Jjppoe5Ltqht4t+BawpJfUgpO/oaz5cPuXkOqMYBWe/j4UvaqWiRPXoz50I7tL8ixrpEqHCQJme1Zn6kTJtRcn13pODIEIFg6MmirNBARbR4GhUU3DAG5TLd9NHrBcD/t6KwyPurvBCkgJlWyODb82MsAVIhZe6DDM7Oze0bjMGyAhPdi8DmrU02g2TgL3iM3oTa/p3ILTTbMemTVVCgidxomaCn9teCKp0bacMhGJmYiFg43Yy4UWtuBXmg5cGi8EOCN
 
-    homebridge_version: 0.4.45
+    homebridge_version: 1.1.2
     # The homebridge user home directory
     homebridge_dir: /var/homebridge
     # Path to homebridge
@@ -66,7 +73,7 @@
     # If homebridge should run in debug mode
     homebridge_debug: false
     # Node.js version to run homebridge under
-    homebridge_nodejs_version: "10.x"
+    homebridge_nodejs_version: "12.x"
     # Enable CAP_NET_RAW
     homebridge_enable_cap_net_raw: false
     # Homebridge config.json (see https://github.com/nfarina/homebridge/blob/master/config-sample.json)
@@ -76,9 +83,15 @@
     homebridge_plugins:
       - name: homebridge-smartthings
         version: 0.5.1
+      - name: homebridge-myq2
+        version: 2.1.11
     homebridge_platforms:
       - platform: "SmartThings"
         name: "SmartThings"
         app_url: "https://graph-na02-useast1.api.smartthings.com:443/api/smartapps/installations/"
         app_id: "c5572edb-2c74-4d8e-8cbc-f26fbf7221dd"
         access_token: "{{ homebridge_smartthings_access_token }}"
+      - platform: "myQ"
+        name: "myQ"
+        email: "emoses@gmail.com"
+        password: "{{ homebridge_myq_password }}"
