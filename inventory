@@ -1,4 +1,4 @@
-192.168.42.37
+lilbox.blindpig.local
 
 [all:vars]
 ansible_connection=ssh

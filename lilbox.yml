@@ -52,7 +52,7 @@
     ssh_public_keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdlXOPSJhETsKyJHeie50OjCY7ENkAW6BL5LfZGoOVRQAicgmNOYAuuzrqT/VNTrJxTBD6Dtlwg3Eop12Jjppoe5Ltqht4t+BawpJfUgpO/oaz5cPuXkOqMYBWe/j4UvaqWiRPXoz50I7tL8ixrpEqHCQJme1Zn6kTJtRcn13pODIEIFg6MmirNBARbR4GhUU3DAG5TLd9NHrBcD/t6KwyPurvBCkgJlWyODb82MsAVIhZe6DDM7Oze0bjMGyAhPdi8DmrU02g2TgL3iM3oTa/p3ILTTbMemTVVCgidxomaCn9teCKp0bacMhGJmYiFg43Yy4UWtuBXmg5cGi8EOCN
 
-    homebridge_version: 0.4.45
+    homebridge_version: 1.1.2
     # The homebridge user home directory
     homebridge_dir: /var/homebridge
     # Path to homebridge
@@ -64,7 +64,7 @@
     # If homebridge should run in debug mode
     homebridge_debug: false
     # Node.js version to run homebridge under
-    homebridge_nodejs_version: "10.x"
+    homebridge_nodejs_version: "12.x"
     # Enable CAP_NET_RAW
     homebridge_enable_cap_net_raw: false
     # Homebridge config.json (see https://github.com/nfarina/homebridge/blob/master/config-sample.json)
@@ -74,6 +74,8 @@
     homebridge_plugins:
       - name: homebridge-smartthings
         version: 0.5.1
+      - name: homebridge-myq2
+        version: 2.1.11
     homebridge_platforms:
       - platform: "SmartThings"
         name: "SmartThings"
