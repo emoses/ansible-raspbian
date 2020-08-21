@@ -24,3 +24,17 @@
     update_cache: yes
     name: unifi
     state: present
+
+- name: Disable ipv6 eth0
+  sysctl:
+    name: net.ipv6.conf.eth0.disable_ipv6
+    value: '1'
+    state: present
+      
+- name: Disable ipv6 lo
+  sysctl:
+    name: net.ipv6.conf.lo.disable_ipv6
+    value: '1'
+    state: present
+    reload: yes
+      
