@@ -85,6 +85,10 @@
         version: 0.5.1
       - name: homebridge-myq2
         version: 2.1.11
+      - name: homebridge-config-ui-x
+        version: 4.26.0
+      - name: homebridge-ring
+        version: 9.8.2
     homebridge_platforms:
       - platform: "SmartThings"
         name: "SmartThings"
@@ -95,3 +99,7 @@
         name: "myQ"
         email: "emoses@gmail.com"
         password: "{{ homebridge_myq_password }}"
+      - platform: "config"
+        name: "config"
+        port: 8123
+        sudo: false
