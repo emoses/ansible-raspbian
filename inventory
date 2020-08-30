@@ -1,4 +1,5 @@
 lilbox.blindpig.local
+raspberrypi.blindpig.local
 
 [all:vars]
 ansible_connection=ssh
