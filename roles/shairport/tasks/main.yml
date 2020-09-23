@@ -88,8 +88,21 @@
     create: true
     backup: true
 
+- name: ensure or create override directory
+  become: true
+  file:
+    path: /etc/systemd/system/shairport-sync.service.d
+    state: directory
+
+- name: make shairport-sync auto restart
+  become: true
+  copy:
+    src: shairport.conf
+    dest: /etc/systemd/system/shairport-sync.service.d/override.conf
+
 - name: enable shairport-sync service
   become: true
   systemd:
+    daemon_reload: true
     name: shairport-sync
     enabled: true
